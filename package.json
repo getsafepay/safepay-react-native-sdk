@@ -1,0 +1,23 @@
+{
+  "name": "safepay-react-native",
+  "version": "1.0.0",
+  "description": "safepay react-native sdk for merchants to consume in their apps for checkout",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehsaantech/safepay-react-native.git"
+  },
+  "keywords": [
+    "react",
+    "native"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ehsaantech/safepay-react-native/issues"
+  },
+  "homepage": "https://github.com/ehsaantech/safepay-react-native#readme"
+}
