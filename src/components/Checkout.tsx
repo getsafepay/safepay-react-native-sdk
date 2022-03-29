@@ -1,28 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import {
   Modal,
-  Alert,
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import queryString from 'query-string';
-import WebView from 'react-native-webview';
+import WebView, { WebViewNavigation } from 'react-native-webview';
 import {SafepayCheckoutProps} from '../types/checkout';
-import checkoutURL from '../enums/checkoutURL';
+import environment from '../enums/checkoutURL';
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
-const components = 'components';
+
 
 const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   props: SafepayCheckoutProps,
 ) => {
   const baseURL =
-    process.env.ENVIRONMENT === checkoutURL.PRODUCTION
-      ? `${PRODUCTION_BASEURL}${components}`
-      : `${SANDBOX_BASEURL}${components}`;
+    props.environment === environment.PRODUCTION
+      ? `${PRODUCTION_BASEURL}components`
+      : `${SANDBOX_BASEURL}components`;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [Token, setToken] = useState('');
@@ -81,7 +80,6 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
         <WebView
@@ -90,20 +88,18 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
           javaScriptEnabled={true}
           javaScriptEnabledAndroid={true}
           style={{flex: 1}}
-          onNavigationStateChange={event => {
+          onNavigationStateChange={(event: WebViewNavigation) => {
             const url = event.url;
             const Params = url.split('?')[1];
             const parsed = queryString.parse(Params);
             if (parsed.action === 'cancelled') {
               setTimeout(() => {
-                Alert.alert('Payment Cancelled!');
                 setModalVisible(!modalVisible);
                 setToken('');
               }, 3000);
             }
             if (parsed.action === 'complete') {
               setTimeout(() => {
-                Alert.alert('Payment Successfull');
                 setModalVisible(!modalVisible);
               }, 3000);
             }

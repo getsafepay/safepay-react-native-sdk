@@ -1,5 +1,7 @@
-import {SafepayCheckoutProps} from './src/types/checkout';
 import * as React from 'react';
-export default class SafepayCheckout extends React.Component <SafepayCheckoutProps> {
-    
-}
+import {SafepayCheckoutProps} from './src/types/checkout';
+const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
+    props: SafepayCheckoutProps,
+  ) => void
+  
+export default SafepayCheckout;

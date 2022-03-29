@@ -1,17 +1,16 @@
 {
   "name": "safepay-react-native",
   "version": "1.0.0",
-  "description": "safepay react-native sdk for merchants to consume in their apps for checkout",
+  "description": "safepay react-native checkout sdk for merchants to consume for the easiest checkout experience",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ehsaantech/safepay-react-native.git"
+    "url": "git+https://github.com/getsafepay/safepay-react-native.git"
   },
   "keywords": [
-    "React",
     "React Native",
     "SafepayCheckout",
     "SafepayCheckout-React-Native-sdk",
@@ -21,7 +20,18 @@
   "author": "",
   "license": "",
   "bugs": {
-    "url": "https://github.com/ehsaantech/safepay-react-native/issues"
+    "url": "https://github.com/getsafepay/safepay-react-native/issues"
   },
-  "homepage": "https://github.com/ehsaantech/safepay-react-native#readme"
+  "homepage": "https://github.com/getsafepay/safepay-react-native#readme",
+  "devDependencies": {
+    "@types/react-native": "^0.67.3",
+    "prettier": "^2.6.1",
+    "react": "^17.0.2",
+    "react-native": "^0.67.4",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "query-string": "^7.1.1",
+    "react-native-webview": "^11.18.0"
+  }
 }

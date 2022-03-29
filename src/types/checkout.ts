@@ -1,6 +1,6 @@
 import {StyleProp, TextStyle} from 'react-native';
 
-export type SafepayCheckoutProps = {
+export interface SafepayCheckoutProps {
   amount: number;
   clientKey: string;
   currency: string;

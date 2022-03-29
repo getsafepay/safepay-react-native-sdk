@@ -1,6 +1,6 @@
-enum checkoutURL {
+enum environment {
   PRODUCTION = 'PRODUCTION',
   SANDBOX = 'SANDBOX',
 }
 
-export default checkoutURL;
+export default environment;

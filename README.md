@@ -1,36 +1,22 @@
-This project aims to be a strong foundation for our merchants to consume safepay-payment-gateway in their applications
+# Safepay React Native Checkout
 
-# Prerequisites
+This project aims to be the easiest way for our merchants to consume safepay-checkout in their React Native applications.
 
-- Node.js > 12 and npm
-- Watchman
-- Xcode 12
-- Cocoapods 1.10.1
-- JDK > 11
-- Android Studio and Android SDK
-  
-# Base Dependencies
+## Installation
 
-- query-string
-- react-native-webview
+npm:
+>npm install safepay-react-native
 
-# Installation
+yarn:
+>yarn add safepay-react-native
 
-Run `npm install` to install the dependencies in order to consume our sdk
-
-- > npm i safepay-react-native-sdk --save
-
-# Usage
-
-> import SafepayCheckout from 'safepay-react-native-sdk';
+### Usage
 
 #### SafepayCheckout
 
 `SafepayCheckout` component is the main component which wraps everything and provides a couple of props (see Config below).
 
 #### Example
-
-following is the basic example to consume our component
 
 ``` ts
 import React from 'react';
@@ -72,7 +58,7 @@ const styles = StyleSheet.create({
 #### Props Configuration
 
 | Property | Type | Description |
-| :---         |     :---:      |          ---: |
+| :---         |     :---:      |          :---: |
 | amount       | number         | use this to specify amount    |
 | clientKey     | string       | use your client key      |
 | currency     | string       | specify currency for your transactions |
