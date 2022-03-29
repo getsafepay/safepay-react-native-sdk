@@ -11,11 +11,15 @@
     "url": "git+https://github.com/ehsaantech/safepay-react-native.git"
   },
   "keywords": [
-    "react",
-    "native"
+    "React",
+    "React Native",
+    "SafepayCheckout",
+    "SafepayCheckout-React-Native-sdk",
+    "Paymentgateway",
+    "Checkout"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": "https://github.com/ehsaantech/safepay-react-native/issues"
   },
