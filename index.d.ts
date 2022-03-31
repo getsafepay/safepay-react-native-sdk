@@ -1,7 +1,8 @@
-import * as React from 'react';
-import {SafepayCheckoutProps} from './src/types/checkout';
-const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
-    props: SafepayCheckoutProps,
-  ) => void
-  
-export default SafepayCheckout;
+import { SafepayCheckoutProps } from './src/types/checkout';
+import {FunctionComponent} from 'react';
+
+export type SafepayProps = SafepayCheckoutProps;
+declare module 'SafepayCheckout' {
+ const SafepayCheckout: FunctionComponent<SafepayProps>;
+ export default SafepayCheckout;
+}

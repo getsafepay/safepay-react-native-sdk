@@ -9,7 +9,7 @@ import {
 import queryString from 'query-string';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import {SafepayCheckoutProps} from '../types/checkout';
-import environment from '../enums/checkoutURL';
+import environment from '../enums/environment';
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
@@ -20,15 +20,15 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
 ) => {
   const baseURL =
     props.environment === environment.PRODUCTION
-      ? `${PRODUCTION_BASEURL}components`
-      : `${SANDBOX_BASEURL}components`;
+      ? `${PRODUCTION_BASEURL}`
+      : `${SANDBOX_BASEURL}`;
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [Token, setToken] = useState('');
+  const [token, setToken] = useState('');
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await fetch(`${SANDBOX_BASEURL}order/v1/init`, {
+        const response = await fetch(`${baseURL}order/v1/init`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -44,6 +44,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
         const json = await response.json();
         setToken(json.data.token);
       } catch (error) {
+        props.onErrorFetchingTracker();
         console.error(error);
       }
     };
@@ -53,15 +54,15 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   }, [modalVisible, props]);
 
   const params = {
-    beacon: `${Token}`,
+    beacon: `${token}`,
     order_id: props.order_id,
     source: 'mobile',
     env: props.environment,
   };
 
   const qs = queryString.stringify(params);
-
-  const checkoutUrl = `${baseURL}?${qs}`;
+  const componentUrl = `${baseURL}components`;
+  const checkoutUrl = `${componentUrl}?${qs}`;
 
   return (
     <>
@@ -90,16 +91,18 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
           style={{flex: 1}}
           onNavigationStateChange={(event: WebViewNavigation) => {
             const url = event.url;
-            const Params = url.split('?')[1];
-            const parsed = queryString.parse(Params);
+            const params = url.split('?')[1];
+            const parsed = queryString.parse(params);
             if (parsed.action === 'cancelled') {
               setTimeout(() => {
+                props.onPaymentCancelled();
                 setModalVisible(!modalVisible);
                 setToken('');
               }, 3000);
             }
             if (parsed.action === 'complete') {
               setTimeout(() => {
+                props.onPaymentComplete();
                 setModalVisible(!modalVisible);
               }, 3000);
             }
