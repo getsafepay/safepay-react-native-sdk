@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "safepay react-native checkout sdk for merchants to consume for the easiest checkout experience",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

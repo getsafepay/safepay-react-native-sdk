@@ -62,8 +62,10 @@ const styles = StyleSheet.create({
 | amount       | number         | use this to specify amount    |
 | clientKey     | string       | use your client key      |
 | currency     | string       | specify currency for your transactions |
-| environment     | string       | use this to specify environment  |
+| environment     | enum | use this to specify environment  |
 | order_id     | string       | use this for your order id  |
 | buttonTitle     | string       | use this to give title to your button|
 | buttonStyle     | string      | use this to give styles to your button|
-| buttonTextStyle | string | use this to give styles to your button text|
+| onPaymentComplete() | function | use this to notify merchants if payment is complete |
+| onErrorFetchingTracker() | function | use this to notify merchants if there is an error in fetching tracker id|
+| onPaymentCancelled() | function | use this to notify merchants if customer is cancelling the payment|
