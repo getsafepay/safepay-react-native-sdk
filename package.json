@@ -1,40 +1,65 @@
 {
-  "name": "safepay-react-native",
-  "version": "1.0.8",
-  "description": "safepay react-native checkout sdk for merchants to consume for the easiest checkout experience",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "scripts": {
-    "test": "jest",
-    "build": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/getsafepay/safepay-react-native.git"
-  },
-  "keywords": [
-    "React Native",
-    "SafepayCheckout",
-    "SafepayCheckout-React-Native-sdk",
-    "Paymentgateway",
-    "Checkout"
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
   ],
-  "author": "",
-  "license": "",
-  "bugs": {
-    "url": "https://github.com/getsafepay/safepay-react-native/issues"
+  "engines": {
+    "node": ">=10"
   },
-  "homepage": "https://github.com/getsafepay/safepay-react-native#readme",
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "safepay-rn-sdk",
+  "author": "Safepay",
+  "module": "dist/safepay-rn-sdk.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/safepay-rn-sdk.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/safepay-rn-sdk.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/react": "^17.0.43",
     "@types/react-native": "^0.67.3",
-    "prettier": "^2.6.1",
+    "husky": "^7.0.4",
     "react": "^17.0.2",
     "react-native": "^0.67.4",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "query-string": "^7.1.1",
-    "react-native-webview": "^11.18.0",
-    "react-native-screens": "^3.13.1"
+    "react-native-webview": "^11.18.0"
   }
 }
