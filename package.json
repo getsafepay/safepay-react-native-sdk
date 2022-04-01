@@ -1,6 +1,6 @@
 {
   "name": "safepay-react-native",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "safepay react-native checkout sdk for merchants to consume for the easiest checkout experience",
   "main": "index.js",
   "types": "index.d.ts",
