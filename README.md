@@ -10,7 +10,24 @@ npm:
 yarn:
 >yarn add safepay-react-native
 
-### Usage
+### 1. Add react-native-webview to your dependencies
+
+> $ npm install --save react-native-webview
+
+### `Android:`
+
+Android - `react-native-webview` version <6: This module does not require any extra step after running the link command.
+
+Android - `react-native-webview` version >=6.X.X: Please make sure AndroidX is enabled in your project by editting `android/gradle.properties` and adding 2 lines:
+
+For Android manual installation, please refer to this [article](https://engineering.brigad.co/demystifying-react-native-modules-linking-964399ec731b) where you can find detailed step on how to link any react-native project.
+
+### `iOS:`
+
+If using CocoaPods, in the ios/ or macos/ directory run:
+> $ pod install
+
+#### Usage
 
 #### SafepayCheckout
 
