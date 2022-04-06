@@ -13,7 +13,8 @@
   "scripts": {
     "start": "tsdx watch",
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsdx build",
+    "build": "npm run clean && tsdx build && npm run copy:assets",
+    "copy:assets": "cp -r src/assets dist/assets",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "npm run clean && tsdx build",

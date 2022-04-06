@@ -8,7 +8,7 @@ export interface SafepayCheckoutProps {
   environment: environment;
   order_id: string;
   buttonStyle?: StyleProp<any>;
-  backgroundtheme: theme;
+  buttonTheme: theme;
   onPaymentCancelled: () => void;
   onPaymentComplete: () => void;
   onErrorFetchingTracker: () => void;
