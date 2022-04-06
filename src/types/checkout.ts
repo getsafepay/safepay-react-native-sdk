@@ -1,14 +1,14 @@
-import {StyleProp, TextStyle} from 'react-native';
+import {StyleProp} from 'react-native';
 import environment from '../enums/environment';
+import theme from '../enums/theme';
 export interface SafepayCheckoutProps {
   amount: number;
   clientKey: string;
   currency: string;
   environment: environment;
   order_id: string;
-  buttonTitle: string;
   buttonStyle?: StyleProp<any>;
-  buttonTextStyle?: StyleProp<TextStyle>;
+  backgroundtheme: theme;
   onPaymentCancelled: () => void;
   onPaymentComplete: () => void;
   onErrorFetchingTracker: () => void;

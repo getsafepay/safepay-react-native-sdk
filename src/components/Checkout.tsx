@@ -5,11 +5,16 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import queryString from 'query-string';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import {SafepayCheckoutProps} from '../types/checkout';
 import environment from '../enums/environment';
+import theme from '../enums/theme';
+import BlueLogo from "../../assets/safepay-logo-blue.png";
+import DarkLogo from "../../assets/safepay-logo-dark.png";
+import LightLogo from "../../assets/safepay-logo-white.png";
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
@@ -63,7 +68,35 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   const qs = queryString.stringify(params);
   const componentUrl = `${baseURL}components`;
   const checkoutUrl = `${componentUrl}?${qs}`;
+  
+  const backgroundtheme : theme = props.backgroundtheme;
+  switch (backgroundtheme) {
+    case theme.WHITEBACKGROUND:
+      <Image
+        style={styles.imageStyle}
+        source={BlueLogo}
+      />;
+      break;
+      case theme.LIGHTBACKGROUND:
+      <Image
+        style={styles.imageStyle}
+        source={DarkLogo}
+      />;
+      break;
+      case theme.DARKBACKGROUND:
+      <Image
+        style={styles.imageStyle}
+        source={LightLogo}
+      />;
+      break;
 
+      default:
+      <Image
+        style={styles.imageStyle}
+        source={require('./safepay-logo-blue.png')}
+      />;
+      break;
+  }
   return (
     <>
       <View style={styles.view}>
@@ -71,9 +104,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
         <TouchableOpacity
           style={(styles.button, props.buttonStyle)}
           onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={(styles.btn_text, props.buttonTextStyle)}>
-            {props.buttonTitle}
-          </Text>
+          {props.backgroundtheme}
         </TouchableOpacity>
       </View>
       <Modal
@@ -135,5 +166,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'lightblue',
     padding: 10,
+  },
+  imageStyle: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });
