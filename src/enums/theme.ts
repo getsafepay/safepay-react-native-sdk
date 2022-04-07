@@ -1,6 +1,6 @@
 enum theme {
     DEFAULT = '#ffffff',
-    LIGHT = '#00cf83',
+    LIGHT = 'white',
     DARK = '#0e0e0e'
 }
 

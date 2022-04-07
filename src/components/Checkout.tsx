@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import queryString from 'query-string';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import { SafepayCheckoutProps } from '../types/checkout';
 import environment from '../enums/environment';
 import theme from '../enums/theme';
+
+const defaultLogo = require('./assets/safepay-logo-blue.png');
+const darkLogo = require('./assets/safepay-logo-dark.png');
+const lightLogo = require('./assets/safepay-logo-white.png');
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
@@ -67,30 +64,47 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
 
   const renderLogo = (th: theme = theme.DEFAULT) => {
     if (th === theme.DARK) {
-      return <Image source={require('./assets/safepay-logo-white.png')} />;
+      return (
+        <Image
+          source={darkLogo}
+          style={{ width: 100, resizeMode: 'contain' }}
+        />
+      );
     } else if (th === theme.LIGHT) {
-      return <Image source={require('./assets/safepay-logo-dark.png')} />;
+      return (
+        <Image
+          source={lightLogo}
+          style={{ width: 100, resizeMode: 'contain' }}
+        />
+      );
     } else {
       // default logo
-      return <Image source={require('./assets/safepay-logo-blue.png')} />;
+      return (
+        <Image
+          source={defaultLogo}
+          style={{ width: 100, resizeMode: 'contain' }}
+        />
+      );
     }
   };
 
   return (
     <>
-      <View style={styles.view}>
-        <Text style={styles.text}>Checkout page SafePay</Text>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            props.buttonStyle,
-            { backgroundColor: props.buttonTheme },
-          ]}
-          onPress={() => setModalVisible(!modalVisible)}
-        >
-          {renderLogo(props.buttonTheme)}
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          props.buttonStyle,
+          {
+            backgroundColor: props.buttonTheme,
+            borderColor:
+              props.buttonTheme === theme.DEFAULT ? '#6A9ADB' : '#0e0e0e',
+          },
+        ]}
+        onPress={() => setModalVisible(!modalVisible)}
+      >
+        {renderLogo(props.buttonTheme)}
+      </TouchableOpacity>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -131,25 +145,14 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
 export default SafepayCheckout;
 
 const styles = StyleSheet.create({
-  view: {
+  button: {
     marginTop: '10%',
     marginLeft: 'auto',
     marginRight: 'auto',
-  },
-  text: {
-    textAlign: 'center',
-    marginTop: '50%',
-    marginBottom: '10%',
-    color: 'black',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  btn_text: {
-    color: 'black',
-  },
-  button: {
     alignItems: 'center',
     backgroundColor: 'lightblue',
     padding: 10,
+    borderRadius: 4,
+    borderWidth: 1,
   },
 });
