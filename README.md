@@ -47,11 +47,13 @@ const Home: React.FC = () => {
         amount={455}
         clientKey="sec_xxxx-yourkey"
         currency="PKR"
-        environment="sandbox"
+        environment={environment.SANDBOX}
         order_id="12345"
-        buttonTitle="Checkout"
         buttonStyle={styles.button}
-        buttonTextStyle={styles.btn_text}
+        buttonTheme={theme.DEFAULT}
+        onPaymentCancelled={() => Alert.alert('Payment Cancelled!')}
+        onPaymentComplete={() => Alert.alert('Payment Successfull')}
+        onErrorFetchingTracker={() => Alert.alert('error fetching tracker id')}
       />
     </>
   );
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
 | currency     | string       | specify currency for your transactions |
 | environment     | enum | use this to specify environment  |
 | order_id     | string       | use this for your order id  |
-| buttonTitle     | string       | use this to give title to your button|
+| buttonTheme     | enum       | use this to specify theme to your button|
 | buttonStyle     | string      | use this to give styles to your button|
 | onPaymentComplete() | function | use this to notify merchants if payment is complete |
 | onErrorFetchingTracker() | function | use this to notify merchants if there is an error in fetching tracker id|
