@@ -1,34 +1,24 @@
 {
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "description": "safepay react-native checkout sdk for merchants to consume for the easiest checkout experience",
   "scripts": {
-    "start": "tsdx watch",
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsdx build && npm run copy:assets",
-    "copy:assets": "cp -r src/assets dist/assets",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "prepare": "npm run clean && tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "test": "jest",
+    "build": "tsc"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16",
+    "react-native": "*"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
+  "keywords": [
+    "React Native",
+    "SafepayCheckout",
+    "SafepayCheckout-React-Native-sdk",
+    "Paymentgateway",
+    "Checkout"
+  ],
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -37,32 +27,15 @@
   },
   "name": "safepay-react-native-sdk",
   "author": "Safepay",
-  "module": "dist/safepay-rn-sdk.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/safepay-rn-sdk.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/safepay-rn-sdk.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
-    "@rollup/plugin-image": "^2.1.1",
-    "@size-limit/preset-small-lib": "^7.0.8",
-    "@types/react": "^17.0.43",
     "@types/react-native": "^0.67.3",
-    "husky": "^7.0.4",
+    "prettier": "^2.6.1",
     "react": "^17.0.2",
     "react-native": "^0.67.4",
-    "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "query-string": "^7.1.1",
-    "react-native-webview": "^11.18.0"
+    "react-native-webview": "^10.9.3"
   }
 }

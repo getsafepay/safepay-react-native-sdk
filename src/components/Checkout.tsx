@@ -6,9 +6,9 @@ import { SafepayCheckoutProps } from '../types/checkout';
 import environment from '../enums/environment';
 import theme from '../enums/theme';
 
-const defaultLogo = require('./assets/safepay-logo-blue.png');
-const darkLogo = require('./assets/safepay-logo-dark.png');
-const lightLogo = require('./assets/safepay-logo-white.png');
+const defaultLogo = require('../assets/safepay-logo-blue.png');
+const darkLogo = require('../assets/safepay-logo-dark.png');
+const lightLogo = require('../assets/safepay-logo-white.png');
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
@@ -70,7 +70,8 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
           style={{ width: 100, resizeMode: 'contain' }}
         />
       );
-    } else if (th === theme.LIGHT) {
+    } 
+    else if (th === theme.LIGHT) {
       return (
         <Image
           source={lightLogo}
