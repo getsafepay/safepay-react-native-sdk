@@ -10,7 +10,24 @@ npm:
 yarn:
 >yarn add safepay-react-native
 
-### Usage
+### 1. Add react-native-webview to your dependencies
+
+> $ npm install --save react-native-webview
+
+### `Android:`
+
+Android - `react-native-webview` version <6: This module does not require any extra step after running the link command.
+
+Android - `react-native-webview` version >=6.X.X: Please make sure AndroidX is enabled in your project by editting `android/gradle.properties` and adding 2 lines:
+
+For Android manual installation, please refer to this [article](https://engineering.brigad.co/demystifying-react-native-modules-linking-964399ec731b) where you can find detailed step on how to link any react-native project.
+
+### `iOS:`
+
+If using CocoaPods, in the ios/ or macos/ directory run:
+> $ pod install
+
+#### Usage
 
 #### SafepayCheckout
 
@@ -30,11 +47,13 @@ const Home: React.FC = () => {
         amount={455}
         clientKey="sec_xxxx-yourkey"
         currency="PKR"
-        environment="sandbox"
+        environment={environment.SANDBOX}
         order_id="12345"
-        buttonTitle="Checkout"
         buttonStyle={styles.button}
-        buttonTextStyle={styles.btn_text}
+        buttonTheme={theme.DEFAULT}
+        onPaymentCancelled={() => Alert.alert('Payment Cancelled!')}
+        onPaymentComplete={() => Alert.alert('Payment Successfull')}
+        onErrorFetchingTracker={() => Alert.alert('error fetching tracker id')}
       />
     </>
   );
@@ -62,8 +81,10 @@ const styles = StyleSheet.create({
 | amount       | number         | use this to specify amount    |
 | clientKey     | string       | use your client key      |
 | currency     | string       | specify currency for your transactions |
-| environment     | string       | use this to specify environment  |
+| environment     | enum | use this to specify environment  |
 | order_id     | string       | use this for your order id  |
-| buttonTitle     | string       | use this to give title to your button|
+| buttonTheme     | enum       | use this to specify theme to your button|
 | buttonStyle     | string      | use this to give styles to your button|
-| buttonTextStyle | string | use this to give styles to your button text|
+| onPaymentComplete() | function | use this to notify merchants if payment is complete |
+| onErrorFetchingTracker() | function | use this to notify merchants if there is an error in fetching tracker id|
+| onPaymentCancelled() | function | use this to notify merchants if customer is cancelling the payment|

@@ -1,34 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Modal, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import queryString from 'query-string';
 import WebView, { WebViewNavigation } from 'react-native-webview';
-import {SafepayCheckoutProps} from '../types/checkout';
-import environment from '../enums/checkoutURL';
+import { SafepayCheckoutProps } from '../types/checkout';
+import environment from '../enums/environment';
+import theme from '../enums/theme';
+
+const defaultLogo = require('../assets/safepay-logo-blue.png');
+const lightLogo = require('../assets/safepay-logo-white.png');
+const darkLogo = require('../assets/safepay-logo-dark.png');
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
 
-
 const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
-  props: SafepayCheckoutProps,
+  props: SafepayCheckoutProps
 ) => {
   const baseURL =
     props.environment === environment.PRODUCTION
-      ? `${PRODUCTION_BASEURL}components`
-      : `${SANDBOX_BASEURL}components`;
+      ? `${PRODUCTION_BASEURL}`
+      : `${SANDBOX_BASEURL}`;
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [Token, setToken] = useState('');
+  const [token, setToken] = useState('');
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await fetch(`${SANDBOX_BASEURL}order/v1/init`, {
+        const response = await fetch(`${baseURL}order/v1/init`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -44,6 +42,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
         const json = await response.json();
         setToken(json.data.token);
       } catch (error) {
+        props.onErrorFetchingTracker();
         console.error(error);
       }
     };
@@ -53,53 +52,79 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   }, [modalVisible, props]);
 
   const params = {
-    beacon: `${Token}`,
+    beacon: `${token}`,
     order_id: props.order_id,
     source: 'mobile',
     env: props.environment,
   };
 
   const qs = queryString.stringify(params);
+  const componentUrl = `${baseURL}components`;
+  const checkoutUrl = `${componentUrl}?${qs}`;
 
-  const checkoutUrl = `${baseURL}?${qs}`;
+  const renderLogo = (th: theme = theme.DEFAULT) => {
+    let srcLogo: any;
+    switch (th) {
+      case theme.DARK:
+        srcLogo = lightLogo;
+        break;
+      case theme.LIGHT:
+        srcLogo = darkLogo;
+        break;
+      default:
+        srcLogo = defaultLogo;
+        break;
+    }
+    return (
+      <Image source={srcLogo} style={{ width: 100, resizeMode: 'contain' }} />
+    );
+  };
 
   return (
     <>
-      <View style={styles.view}>
-        <Text style={styles.text}>Checkout page SafePay</Text>
-        <TouchableOpacity
-          style={(styles.button, props.buttonStyle)}
-          onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={(styles.btn_text, props.buttonTextStyle)}>
-            {props.buttonTitle}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          props.buttonStyle,
+          {
+            backgroundColor: props.buttonTheme,
+            borderColor:
+              props.buttonTheme === theme.DEFAULT ? '#6A9ADB' : '#0e0e0e',
+          },
+        ]}
+        onPress={() => setModalVisible(!modalVisible)}
+      >
+        {renderLogo(props.buttonTheme)}
+      </TouchableOpacity>
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}>
+        }}
+      >
         <WebView
-          source={{uri: checkoutUrl}}
+          source={{ uri: checkoutUrl }}
           domStorageEnabled={true}
           javaScriptEnabled={true}
           javaScriptEnabledAndroid={true}
-          style={{flex: 1}}
+          style={{ flex: 1 }}
           onNavigationStateChange={(event: WebViewNavigation) => {
             const url = event.url;
-            const Params = url.split('?')[1];
-            const parsed = queryString.parse(Params);
+            const params = url.split('?')[1];
+            const parsed = queryString.parse(params);
             if (parsed.action === 'cancelled') {
               setTimeout(() => {
+                props.onPaymentCancelled();
                 setModalVisible(!modalVisible);
                 setToken('');
               }, 3000);
             }
             if (parsed.action === 'complete') {
               setTimeout(() => {
+                props.onPaymentComplete();
                 setModalVisible(!modalVisible);
               }, 3000);
             }
@@ -112,25 +137,14 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
 export default SafepayCheckout;
 
 const styles = StyleSheet.create({
-  view: {
+  button: {
     marginTop: '10%',
     marginLeft: 'auto',
     marginRight: 'auto',
-  },
-  text: {
-    textAlign: 'center',
-    marginTop: '50%',
-    marginBottom: '10%',
-    color: 'black',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  btn_text: {
-    color: 'black',
-  },
-  button: {
     alignItems: 'center',
     backgroundColor: 'lightblue',
     padding: 10,
+    borderRadius: 4,
+    borderWidth: 1,
   },
 });
