@@ -63,30 +63,21 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   const checkoutUrl = `${componentUrl}?${qs}`;
 
   const renderLogo = (th: theme = theme.DEFAULT) => {
-    if (th === theme.DARK) {
-      return (
-        <Image
-          source={lightLogo}
-          style={{ width: 100, resizeMode: 'contain' }}
-        />
-      );
-    } 
-    else if (th === theme.LIGHT) {
-      return (
-        <Image
-          source={darkLogo}
-          style={{ width: 100, resizeMode: 'contain' }}
-        />
-      );
-    } else {
-      // default logo
-      return (
-        <Image
-          source={defaultLogo}
-          style={{ width: 100, resizeMode: 'contain' }}
-        />
-      );
+    let srcLogo: any;
+    switch (th) {
+      case theme.DARK:
+        srcLogo = lightLogo;
+        break;
+      case theme.LIGHT:
+        srcLogo = darkLogo;
+        break;
+      default:
+        srcLogo = defaultLogo;
+        break;
     }
+    return (
+      <Image source={srcLogo} style={{ width: 100, resizeMode: 'contain' }} />
+    );
   };
 
   return (
