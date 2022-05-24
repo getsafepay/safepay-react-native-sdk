@@ -37,7 +37,7 @@ If using CocoaPods, in the ios/ or macos/ directory run:
 
 ``` ts
 import React from 'react';
-import SafepayCheckout from 'safepay-react-native';
+import SafepayCheckout from '@sfpy/react-native-sdk';
 import {StyleSheet} from 'react-native';
 
 const Home: React.FC = () => {
