@@ -49,7 +49,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
     if (modalVisible) {
       fetchToken();
     }
-  }, [modalVisible, props]);
+  }, [modalVisible]);
 
   const params = {
     beacon: `${token}`,
