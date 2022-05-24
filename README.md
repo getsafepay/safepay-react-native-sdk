@@ -5,10 +5,10 @@ This project aims to be the easiest way for our merchants to consume safepay-che
 ## Installation
 
 npm:
->npm install safepay-react-native
+>npm install @sfpy/react-native-sdk
 
 yarn:
->yarn add safepay-react-native
+>yarn add @sfpy/react-native-sdk
 
 ### 1. Add react-native-webview to your dependencies
 
