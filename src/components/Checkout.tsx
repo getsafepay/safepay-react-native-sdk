@@ -23,8 +23,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
 
   const [modalVisible, setModalVisible] = useState(false);
   const [token, setToken] = useState('');
-  useEffect(() => {
-    const fetchToken = async () => {
+   const fetchToken = async () => {
       try {
         const response = await fetch(`${baseURL}order/v1/init`, {
           method: 'POST',
@@ -46,6 +45,8 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
         console.error(error);
       }
     };
+    
+    useEffect(() => {
     if (modalVisible) {
       fetchToken();
     }
