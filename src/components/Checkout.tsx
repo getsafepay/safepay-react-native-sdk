@@ -55,6 +55,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
     beacon: `${token}`,
     order_id: props.order_id,
     source: 'mobile',
+    webhooks: !!props.webhooks,
     env: props.environment,
   };
 

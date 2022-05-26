@@ -5,6 +5,7 @@ export interface SafepayCheckoutProps {
   amount: number;
   clientKey: string;
   currency: string;
+  webhooks?: boolean
   environment: environment;
   order_id: string;
   buttonStyle?: StyleProp<any>;
