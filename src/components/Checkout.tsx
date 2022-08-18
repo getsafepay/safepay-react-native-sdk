@@ -60,7 +60,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   };
 
   const qs = queryString.stringify(params);
-  const componentUrl = `${baseURL}components`;
+  const componentUrl = `${baseURL}checkout/pay`;
   const checkoutUrl = `${componentUrl}?${qs}`;
 
   const renderLogo = (th: theme = theme.DEFAULT) => {
