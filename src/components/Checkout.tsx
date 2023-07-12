@@ -12,6 +12,8 @@ const darkLogo = require('../assets/safepay-logo-dark.png');
 
 const PRODUCTION_BASEURL = 'https://api.getsafepay.com/';
 const SANDBOX_BASEURL = 'https://sandbox.api.getsafepay.com/';
+const SANDBOX_CHECKOUT_URL = 'https://sandbox.api.getsafepay.com/';
+const PRODUCTION_CHECKOUT_URL = 'https://getsafepay.com/';
 
 const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   props: SafepayCheckoutProps
@@ -20,6 +22,11 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
     props.environment === environment.PRODUCTION
       ? `${PRODUCTION_BASEURL}`
       : `${SANDBOX_BASEURL}`;
+
+  const componentUrl =
+    props.environment === environment.PRODUCTION
+      ? `${PRODUCTION_CHECKOUT_URL}`
+      : `${SANDBOX_CHECKOUT_URL}`;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [token, setToken] = useState('');
@@ -60,8 +67,7 @@ const SafepayCheckout: React.FC<SafepayCheckoutProps> = (
   };
 
   const qs = queryString.stringify(params);
-  const componentUrl = `${baseURL}checkout/pay`;
-  const checkoutUrl = `${componentUrl}?${qs}`;
+  const checkoutUrl = `${componentUrl}checkout/pay?${qs}`;
 
   const renderLogo = (th: theme = theme.DEFAULT) => {
     let srcLogo: any;
