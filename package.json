@@ -1,7 +1,7 @@
 {
   "name": "@sfpy/react-native-sdk",
   "author": "Safepay",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "main": "index.js",
   "typings": "index.d.ts",
