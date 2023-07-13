@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "query-string": "^7.1.1",
-    "react-native-webview": "^10.9.3"
+    "react-native-webview": "^11.26.1"
   }
 }
