@@ -1,5 +1,7 @@
 # Safepay React Native Checkout
 
+> **⚠️ Deprecated:** This package is no longer maintained. Please use [sfpy-react-native](https://github.com/getsafepay/sfpy-react-native) instead.
+
 This project aims to be the easiest way for our merchants to consume safepay-checkout in their React Native applications.
 
 ## Installation
